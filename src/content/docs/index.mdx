@@ -1,10 +1,8 @@
 ---
-title: HebMorph Service
-description: High-performance Hebrew lemmatization REST API
+title: Hebrew Lemmatization / Stemming API
+description: High-performance Hebrew lemmatization / stemming REST API.
 template: doc
 ---
-
-# HebMorph Service
 
 <div style="margin: 2rem 0;">
   <button 
@@ -20,27 +18,25 @@ template: doc
 
 <script async src="https://tally.so/widgets/embed.js"></script>
 
-A standalone, containerized REST API for high-performance Hebrew lemmatization, powered by a resurrected version of the [HebMorph](https://github.com/synhershko/HebMorph) library.
+A standalone REST API for high-performance Hebrew lemmatization, powered by a resurrected version of the [HebMorph](https://github.com/synhershko/HebMorph) library.
 
 ## Overview
 
 This project provides a simple, reliable, and always-on RESTful service for lemmatizing Hebrew text. It was created to fill a gap in the open-source ecosystem, where existing solutions for Hebrew NLP were found to be either unstable, inaccurate (especially with construct-state cases, or "smichut"), or no longer maintained.
 
-The service is packaged in a lightweight Docker container, making it easy to deploy and scale anywhere. It exposes two endpoints:
+The service exposes two endpoints:
 - `POST /lemmatize` – canonical one-lemma-per-piece for production.
 - `POST /lemmatize-raw` – raw HebMorph candidates per token for debugging.
 
 ## Features
 
 -   **High-Quality Lemmatization**: Leverages the original, battle-tested linguistic rules of HebMorph.
--   **Standalone & Portable**: Packaged as a minimal Docker image with no external dependencies.
--   **High Performance**: Built on Javalin, a lightweight and fast web framework for Java.
+-   **High Performance**: Built on Javalin (a lightweight Java web framework) and deployed on Google Cloud Run for fast, auto-scaling responses.
+-   **Stable & Secure**: Routed through Zuplo to ensure high availability and prevent abuse.
 -   **Simple REST API**: Easy to integrate into any application stack.
 -   **Batch Processing**: Lemmatize multiple sentences in a single API call for efficiency.
 
 ## API Usage
-
-The service runs on port `5001`.
 
 ### Endpoint: `POST /lemmatize`
 
@@ -51,7 +47,8 @@ Accepts a JSON object with a single key, `sentences`, which is an array of strin
 Request (smichut, plural/singular, adjective gender, punctuation/parentheses, numerals/Latin, units with quotes/gershaim):
 
 ```bash
-curl -X POST http://localhost:5001/lemmatize \
+curl -X POST "https://teivah.solutions/api/lemmatize" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "sentences": [
@@ -103,7 +100,8 @@ Accepts a JSON object with a single key, `sentence`, which is one string. Return
 Request:
 
 ```bash
-curl -X POST http://localhost:5001/lemmatize-raw \
+curl -X POST "https://teivah.solutions/api/lemmatize-raw" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "sentence": "אבוקדו האס, אורגני"
@@ -146,39 +144,6 @@ Response (real output excerpt):
 - Numerals and Latin tokens pass through unchanged.
 - Do not emit punctuation tokens.
 
-## Getting Started
-
-### Using Docker (Recommended)
-
-Publish your image under your own namespace, then:
-
-```bash
-docker pull shmigi/hebmorph-service:latest
-docker run -d -p 5001:5001 --name hebmorph-service shmigi/hebmorph-service:latest
-```
-The service will be available at `http://localhost:5001`.
-
-### Building from Source
-
-You need Java 11 (or higher) and Gradle installed.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/roman-sh/hebMorph-service.git
-    cd hebMorph-service
-    ```
-
-2.  **Build the fat JAR using the Gradle shadow plugin:**
-    ```bash
-    ./gradlew shadowJar
-    ```
-    This will create a self-contained JAR at `build/libs/hebmorph-service.jar`.
-
-3.  **Run the service:**
-    ```bash
-    java -jar build/libs/hebmorph-service.jar
-    ```
-
 ## Acknowledgements
 
-This project would not be possible without the original work done by Shay Synhershko and the other contributors to the [HebMorph](https://github.com/synhershko/HebMorph) project. We have gratefully resurrected their powerful library to make it accessible as a modern microservice. 
+This project would not be possible without the original work done by Shay Synhershko and the other contributors to the [HebMorph](https://github.com/synhershko/HebMorph) project. We have gratefully resurrected their powerful library to make it accessible as a public API. 
