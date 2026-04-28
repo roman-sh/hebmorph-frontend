@@ -163,6 +163,8 @@ Without the Worker, users would call the raw Zuplo URL directly. The Worker give
 | **Core Engine** | Java + HebMorph | Deterministic and fast. Crucial for product search/catalogs (same word always produces the same lemma). While absolute accuracy is inferior to modern deep-learning lemmatizers, its predictability and speed are superior. |
 | **Hosting** | Google Cloud Run | Minimal infra management. |
 | **API Gateway** | Zuplo | Clean API key management layer; avoids building custom auth/CRUD. |
+| **Automation** | n8n | Orchestrates the onboarding flow (Tally → Zuplo → WhatsApp) without writing custom glue code. |
+| **Forms / Lead Capture** | Tally | Embeds cleanly as a modal, completely avoiding custom React/frontend form state management. |
 | **Frontend** | Astro + Starlight | Fast static docs, minimal overhead, excellent developer UX, easy Markdown updates. |
 | **Static Hosting** | Cloudflare Pages | Simple static hosting, fast edge delivery, easy custom domains. |
 | **Reverse Proxy** | Cloudflare Worker | Clean public API path (`/api/*`), hides the raw gateway URL, decouples frontend domain from backend gateway. |
