@@ -1,5 +1,7 @@
 # HebMorph API — End-to-End Architecture
 
+**🌐 Live Portal & Documentation:** [https://teivah.solutions](https://teivah.solutions)
+
 ## Overview
 
 This project provides a fast, reliable REST API for Hebrew lemmatization. Developers can request an API key on the documentation site, receive it instantly via WhatsApp, and immediately start making requests to process Hebrew text.
