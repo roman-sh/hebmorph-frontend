@@ -96,12 +96,19 @@ sequenceDiagram
 * API key management (CRUD & validation)
 * Rate limiting
 * Request routing
-* Public endpoint exposure
 
 **Flow:**
-`Client → Zuplo → Cloud Run`
+`Client → Cloudflare Worker (Proxy) → Zuplo → Cloud Run`
 
-### 4. Documentation Site
+### 4. Cloudflare Worker API Proxy
+**Tool:** Cloudflare Workers
+**Route:** `teivah.solutions/api/*`
+
+**Purpose: Decoupling the Public API from the Internal Gateway**  
+This lightweight edge script acts as a transparent reverse proxy. It allows the public API to sit cleanly under the main documentation domain (`teivah.solutions/api/...`) while completely hiding the underlying Zuplo infrastructure (`hebmorph-main-*.zuplo.dev`).  
+The backend gateway can be replaced later without changing public API URLs.
+
+### 5. Documentation Site
 **Stack:**
 * Astro
 * Starlight
@@ -115,29 +122,14 @@ sequenceDiagram
 * API key request CTA
 * SEO/indexable content
 
-### 5. Cloudflare Worker API Proxy
-**Tool:** Cloudflare Workers
-**Route:** `teivah.solutions/api/*`
-
-**Responsibilities:**
-* Keep public API under the main domain
-* Hide the raw Zuplo gateway URL from users
-* Forward requests to Zuplo
-* Preserve method, headers, body, and query string
-* Strip `/api` prefix before forwarding
-
-**Why This Matters:**
-Without the Worker, users would call the raw Zuplo URL directly. The Worker gives the product a clean, stable API surface. The backend gateway can be replaced later without changing public API URLs.
-
 ### 6. API Key Issuance Flow
 **Frontend:** Tally form embedded in docs site.
 
 **Automation Layer (n8n):**
 * Self-hosted via Coolify on a Hetzner Cloud droplet.
 * Receive Tally webhook submissions
-* Normalize form payload
 * Create Zuplo consumer + API key
-* Send approved WhatsApp template message with the API key using the Meta Cloud API
+* Send WhatsApp template message with the API key using the Meta Cloud API
 * Keep onboarding fully automated
 
 **Flow:**
