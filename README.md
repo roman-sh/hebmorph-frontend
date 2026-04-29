@@ -161,7 +161,7 @@ Without the Worker, users would call the raw Zuplo URL directly. The Worker give
 
 | Component | Technology | Why |
 | :--- | :--- | :--- |
-| **Core Engine** | Java + HebMorph | Deterministic and fast. Crucial for product search/catalogs (same word always produces the same lemma). While absolute accuracy is inferior to modern deep-learning lemmatizers, its predictability and speed are superior. |
+| **Core Engine** | Java + HebMorph | Provides deterministic, production-stable lemmatization optimized for consistency and speed, making it suitable for search, indexing, and catalog normalization use cases. |
 | **Hosting** | Google Cloud Run | Minimal infra management. |
 | **API Gateway** | Zuplo | Clean API key management layer; avoids building custom auth/CRUD. |
 | **Automation** | n8n (Self-hosted) | Orchestrates the onboarding flow (Tally → Zuplo → WhatsApp) without writing custom glue code. |
