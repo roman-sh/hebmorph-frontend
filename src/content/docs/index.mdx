@@ -4,7 +4,7 @@ description: High-performance Hebrew lemmatization / stemming REST API.
 template: doc
 ---
 
-<div style="margin: 2rem 0;">
+<div style="display: flex; align-items: center; margin: 2rem 0;">
   <button 
     data-tally-open="ja0JB6" 
     data-tally-layout="modal" 
@@ -14,7 +14,13 @@ template: doc
   >
     Request API Key
   </button>
+
+  <div style="flex: 1; display: flex; justify-content: center;">
+    <iframe id="status-badge" src="https://teivah.betteruptime.com/badge" width="250" height="30" frameborder="0" scrolling="no" style="color-scheme: normal; height: 30px !important; margin: 0; transform: scale(1.5) translateY(-6px); transform-origin: center;"></iframe>
+  </div>
 </div>
+
+<script src="/badge-theme.js" defer></script>
 
 <script async src="https://tally.so/widgets/embed.js"></script>
 
@@ -27,14 +33,6 @@ This project provides a simple, reliable, and always-on RESTful service for lemm
 The service exposes two endpoints:
 - `POST /lemmatize` – canonical one-lemma-per-piece for production.
 - `POST /lemmatize-raw` – raw HebMorph candidates per token for debugging.
-
-## Features
-
--   **Deterministic & Fast**: Provides production-stable lemmatization optimized for consistency and speed.
--   **High Performance**: Built on Javalin and deployed on Google Cloud Run for fast, auto-scaling responses.
--   **Stable & Secure**: Routed through Zuplo to ensure high availability and prevent abuse.
--   **Simple REST API**: Easy to integrate into any application stack.
--   **Batch Processing**: Lemmatize multiple sentences in a single API call for efficiency.
 
 ## API Usage
 
@@ -143,6 +141,14 @@ Response (real output excerpt):
 - Drop lemmas with length == 1.
 - Numerals and Latin tokens pass through unchanged.
 - Do not emit punctuation tokens.
+
+## Features
+
+-   **Deterministic & Fast**: Provides production-stable lemmatization optimized for consistency and speed.
+-   **High Performance**: Built on Javalin and deployed on Google Cloud Run for fast, auto-scaling responses.
+-   **Stable & Secure**: Routed through Zuplo to ensure high availability and prevent abuse.
+-   **Simple REST API**: Easy to integrate into any application stack.
+-   **Batch Processing**: Lemmatize multiple sentences in a single API call for efficiency.
 
 ## Acknowledgements
 

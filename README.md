@@ -135,6 +135,14 @@ The backend gateway can be replaced later without changing public API URLs.
 **Flow:**
 `Tally form submission → n8n Webhook → Zuplo create consumer/key → Meta WhatsApp Cloud API → API key delivered to user`
 
+### 7. System Monitoring & Status
+**Tool:** Better Stack
+
+**Responsibilities:**
+* Public status page hosted on a custom domain (`status.teivah.solutions`)
+* Embedded, theme-aware status badge on the main documentation site
+* Incident communication and uptime tracking
+
 ---
 
 ## Canonical Processing Logic
@@ -165,3 +173,4 @@ The backend gateway can be replaced later without changing public API URLs.
 | **Frontend** | Astro + Starlight | Fast static docs, minimal overhead, excellent developer UX, easy Markdown updates. |
 | **Static Hosting** | Cloudflare Pages | Simple static hosting, fast edge delivery, easy custom domains. |
 | **Reverse Proxy** | Cloudflare Worker | Clean public API path (`/api/*`), hides the raw gateway URL, decouples frontend domain from backend gateway. |
+| **Status Page** | Better Stack | Automated public status page and embedded badge mapped to a custom subdomain (`status.teivah.solutions`). |

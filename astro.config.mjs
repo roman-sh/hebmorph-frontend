@@ -8,12 +8,19 @@ export default defineConfig({
   integrations: [
       starlight({
           title: 'Hebrew Lemmatization API',
-          social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/roman-sh/hebMorph-service' }],
+          favicon: '/favicon.png',
+          social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/roman-sh/hebmorph-frontend' }],
           sidebar: [
               {
                   label: 'API Reference',
                   items: [
                       { label: 'Overview', slug: '' },
+                  ],
+              },
+              {
+                  label: 'Status',
+                  items: [
+                      { label: 'System Status', link: 'https://status.teivah.solutions' },
                   ],
               },
               {
