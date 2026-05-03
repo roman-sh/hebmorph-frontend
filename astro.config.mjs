@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://teivah.solutions',
   integrations: [
       starlight({
-          title: 'Hebrew Lemmatization API',
+          title: 'HebMorph API',
           favicon: '/favicon.png',
           social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/roman-sh/hebmorph-frontend' }],
           sidebar: [
